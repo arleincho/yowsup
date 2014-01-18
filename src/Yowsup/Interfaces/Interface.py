@@ -43,6 +43,7 @@ class SignalInterfaceBase(object):
 			"receipt_broadcastSent",
 			"status_dirty",
 
+			"exists",
 			"presence_updated", #k
 			"presence_available", #k
 			"presence_unavailable", #k

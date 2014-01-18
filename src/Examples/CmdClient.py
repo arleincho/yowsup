@@ -43,8 +43,10 @@ class WhatsappCmdClient:
 		self.signalsInterface.registerListener("auth_fail", self.onAuthFailed)
 		self.signalsInterface.registerListener("message_received", self.onMessageReceived)
 		self.signalsInterface.registerListener("receipt_messageSent", self.onMessageSent)
-		self.signalsInterface.registerListener("presence_updated", self.onPresenceUpdated)
+		self.signalsInterface.registerListener("presence_request", self.onPresenceUpdated)
 		self.signalsInterface.registerListener("disconnected", self.onDisconnected)
+		self.signalsInterface.registerListener("disconnected", self.onDisconnected)
+		self.signalsInterface.registerListener("exists", self.onExists)
 		
 		
 		self.commandMappings = {"lastseen":lambda: self.methodsInterface.call("presence_request", ( self.jid,)),
@@ -53,6 +55,7 @@ class WhatsappCmdClient:
 								 }
 		
 		self.done = False
+		self.not_send = False
 		#signalsInterface.registerListener("receipt_messageDelivered", lambda jid, messageId: methodsInterface.call("delivered_ack", (jid, messageId)))
 	
 	def login(self, username, password):
@@ -62,17 +65,23 @@ class WhatsappCmdClient:
 		while not self.done:
 			time.sleep(0.5)
 
+	def onExists(self, jid, exists):
+		if exists:
+			self.goInteractive(self.phoneNumber)
+		else:
+			print "%s not exists in whatsapp" % self.phoneNumber
+
 	def onAuthSuccess(self, username):
 		print("Authed %s" % username)
+		self.methodsInterface.call("presence_request", ("%s@s.whatsapp.net" % self.phoneNumber,))
 		self.methodsInterface.call("ready")
-		self.goInteractive(self.phoneNumber)
 
 	def onAuthFailed(self, username, err):
 		print("Auth Failed!")
 
 	def onDisconnected(self, reason):
 		print("Disconnected because %s" %reason)
-		
+
 	def onPresenceUpdated(self, jid, lastSeen):
 		formattedDate = datetime.datetime.fromtimestamp(long(time.time()) - lastSeen).strftime('%d-%m-%Y %H:%M')
 		self.onMessageReceived(0, jid, "LAST SEEN RESULT: %s"%formattedDate, long(time.time()), False, None, False)

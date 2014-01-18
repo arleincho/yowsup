@@ -904,8 +904,11 @@ class ReaderThread(threading.Thread):
 		firstChild = node.getChild(0);
 
 		if "error" in firstChild.toString():
-			return
+			if firstChild.getAttributeValue("code") == "404":
+				self.signalInterface.send("exists", (jid, False))
+			return False
 
+		self.signalInterface.send("exists", (jid, True))
 		ProtocolTreeNode.require(firstChild,"query");
 		seconds = firstChild.getAttributeValue("seconds");
 		status = None
@@ -914,6 +917,7 @@ class ReaderThread(threading.Thread):
 		try:
 			if seconds is not None and jid is not None:
 				self.signalInterface.send("presence_updated", (jid, int(seconds)))
+				return True
 		except:
 			self._d("Ignored exception in handleLastOnline "+ sys.exc_info()[1])
 

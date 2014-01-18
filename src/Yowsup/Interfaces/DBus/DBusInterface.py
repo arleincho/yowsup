@@ -91,6 +91,10 @@ class DBusSignalInterface(SignalInterfaceBase, dbus.service.Object):
 		pass
 
 	@dbus.service.signal(DBUS_INTERFACE)
+	def exists(self, jid):
+		pass
+
+	@dbus.service.signal(DBUS_INTERFACE)
 	def presence_available(self, jid):
 		pass
 
