@@ -47,6 +47,15 @@ class CampaignsHanlder(AdminHandler):
 
 
 
+
+class CampaignAddHanlder(AdminHandler):
+
+    @tornado.web.authenticated
+    def get(self):
+        self.render('admin/campaigns/add.html')
+
+
+
 class ChannelsHanlder(AdminHandler):
 
     @tornado.web.authenticated

@@ -36,6 +36,7 @@ app = tornado.web.Application([
         U(r"", LandingHandler, name='landig'),
         U(r"admin/?", AdminHandler, name='admin'),
         U(r"admin/campaigns/?", CampaignsHanlder, name='campaigns'),
+        U(r"admin/campaign/add?", CampaignAddHanlder, name='campaign_add'),
         U(r"admin/channels/?", ChannelsHanlder, name='channels'),
         U(r"login/?", LoginHandler, name='login'),
         U(r"logout/?", LogoutHandler, name='logout'),
