@@ -8,7 +8,6 @@ import tornado.web
 import uuid
 
 from handlers import *
-from motorengine import connect
 from utils import get_url_spec
 
 path = os.getcwd()

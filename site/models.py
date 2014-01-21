@@ -9,6 +9,8 @@ channel_list = (
     ('prerecorded_calls', 'LLamadas Pregrabadas'),
     ('email', 'Email')
 )
+channel_active = ['whatsapp']
+channel_list_active = [item for item in channel_list if item[0] in channel_active]
 
 range_list = (
     ('minute', 'Minutos'),
@@ -16,7 +18,6 @@ range_list = (
     ('day', 'Diario'),
     ('weekly', 'Semanal'),
 )
-
 
 
 class User(Document):
@@ -78,4 +79,3 @@ class Result(Document):
     data = DictField()
     created_at = DateTimeField(default=datetime.now)
     meta = {'collection': 'results'}
-

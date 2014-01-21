@@ -28,19 +28,19 @@ spew = False
 # Server mechanics
 #
 daemon = False
-pidfile = "/var/python-apps/run/yowsup.lock"
+pidfile = "/var/python3/run/yowsup.lock"
 umask = 0
-# user = "www-data"
-user = "_www"
+user = "www-data"
+# user = "_www"
 group = None
-tmp_upload_dir = "/var/python-apps/tmp/"
+tmp_upload_dir = "/var/python3/tmp/"
 
 #
 #   Logging
 #
 loglevel = 'debug'
-errorlog = '/var/python-apps/log/yowsup-error.log'
-accesslog = '/var/python-apps/log/yowsup-access.log'
+errorlog = '/var/python3/log/yowsup-error.log'
+accesslog = '/var/python3/log/yowsup-access.log'
 # logconfig = '/var/python-apps/log/api2-log.log'
 
 

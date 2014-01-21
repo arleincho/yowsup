@@ -15,10 +15,22 @@ class AdminHandler(MainHandler):
 
         def get_setting(setting_name):
             return self.application.settings[setting_name]
+
+        def get_channel_list():
+            return channel_list
+
+        def get_channels_active():
+            return channel_list_active
+
+        def get_range_list():
+            return range_list
             
         ns.update({
             'q': '',
-            'setting': get_setting
+            'setting': get_setting,
+            'channel_list': get_channel_list,
+            'ranges_list': get_range_list,
+            'channels_active': get_channels_active
         })
 
         return ns
@@ -82,7 +94,7 @@ class ChannelAddHanlder(AdminHandler):
                 key_channel_type = channel_type[0]
                 data_attr = self.get_arguments(attr)
                 if attr.startswith(key_channel_type, 0, len(key_channel_type)):
-                    if data:
+                    if data_attr:
                         data_channel_type.update({attr.split('_', 1)[1]: data_attr[0]})
                 else:
                     data.update({attr: data_attr[0]})
@@ -94,7 +106,7 @@ class ChannelAddHanlder(AdminHandler):
                 self.redirect(self.reverse_url('channels'))
             except NotUniqueError:
                 self.render('admin/channels/add.html', error='Ya existe un canal con el mismo nombre')
-            except Exception:
+            except Exception, e:
                 self.render('admin/channels/add.html', error='Ocurrio un error al momento de guardar el canal')
 
 
@@ -163,3 +175,7 @@ class LogoutHandler(AdminHandler):
     def get(self):
         self.clear_all_cookies()
         self.redirect(self.reverse_url('login'))
+
+
+
+

@@ -40,7 +40,9 @@
                                             <label>Tipo de Canal</label>
                                             <select class="form-control" name="channel_type" id="channel_type">
                                                 <option value="">Seleccione</option>
-                                                <option value="whatsapp">WhatsApp</option>
+                                                {% for channel in channels_active() %}
+                                                    <option value="{{channel[0]}}">{{channel[1]}}</option>
+                                                {% end %}
                                             </select>
                                         </div>
                                         <div class="form-group">
