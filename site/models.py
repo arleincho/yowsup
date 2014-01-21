@@ -23,7 +23,7 @@ class User(Document):
 
     first_name = StringField()
     last_name = StringField()
-    email = EmailField(required=True)
+    username = EmailField(required=True)
     password = StringField(required=True, max_length=69, min_length=69)
     remember = StringField(max_length=80, min_length=80)
     created_at = DateTimeField(default=datetime.now)
@@ -34,7 +34,7 @@ class User(Document):
 
 class Channel(Document):
 
-    name = StringField(required=True)
+    name = StringField(required=True, unique_with=['user'])
     channel_type =  StringField(max_length=17, choices=channel_list)
     config = DictField()
     user = ReferenceField(User)

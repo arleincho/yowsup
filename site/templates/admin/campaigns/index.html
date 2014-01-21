@@ -14,25 +14,20 @@
         {% include ../navbar-left.html %}
 
         <div id="page-wrapper">
-
             <div class="row">
                 <div class="col-lg-12">
-                    
-                        <div class="panel-body">
-                            <h1 id="grid-nesting">Campañas</h1>
-                            <p>Son las unidades en las que se organizan los envios a los targets</p>
-                            <div class="row grid">
-                                <div class="col-md-9">
-                                    <div class="row grid">
-                                        <div class="col-md-6">
-                                
-                                                <a  href="{{reverse_url('campaign_add')}}">Adicionar Campaña</a>
-                                            
-                                        </div>
+                    <div class="panel-body">
+                        <h1 id="grid-nesting">Campañas</h1>
+                        <p>Son las unidades en las que se organizan los envios a los targets</p>
+                        <div class="row grid">
+                            <div class="col-md-9">
+                                <div class="row grid">
+                                    <div class="col-md-6">
+                                        <a  href="{{reverse_url('campaign_add')}}">Adicionar Campaña</a>
                                     </div>
                                 </div>
                             </div>
-                        
+                        </div>
                     </div>
                 </div>
                 <!-- /.col-lg-12 -->
