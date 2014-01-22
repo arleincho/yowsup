@@ -1,0 +1,83 @@
+
+    
+    {% extends "../../base.html" %}
+
+    {% block css %}
+        <link href="{{ static_url('css/plugins/morris/morris-0.4.3.min.css')}}" rel="stylesheet" />
+        <link href="{{ static_url('css/plugins/timeline/timeline.css')}}" rel="stylesheet" />
+    {% end %}
+    {% block content %}
+
+    <div id="wrapper">
+
+        {% include ../navbar-header.html %}
+        {% include ../navbar-left.html %}
+
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel-body">
+                        <h1 id="grid-nesting">Canales</h1>
+                        <p>Son los medios por los cuales se enviaran las campañas a los objetivos</p>
+                        <div class="row grid">
+                            <div class="col-md-9">
+                                <div class="row grid">
+                                    <div class="col-md-6">
+                                        <a  href="{{reverse_url('channel_add')}}">Adicionar Canal</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Listado de Canales por Usuario
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                    <thead>
+                                        <tr>
+                                            <th>Nombre</th>
+                                            <th>Tipo de Canal</th>
+                                            <th>Fecha de Creaci&oacute;n</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for channel in channels %}
+                                            <tr class="odd gradeX">
+                                                <td>{{ channel.name }}</td>
+                                                <td>{{ channel.channel_type }}</td>
+                                                <td>{{ channel.created_at.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                                            </tr>
+                                        {% end %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+        </div>
+    {% end %}
+
+    {% block javascript %}
+        <script src="{{static_url('js/plugins/dataTables/jquery.dataTables.js')}}"></script>
+        <script src="{{static_url('js/plugins/dataTables/dataTables.bootstrap.js')}}"></script>
+        <script>
+            $(document).ready(function() {
+                $('#dataTables-example').dataTable();
+            });
+        </script>
+    {% end %}
